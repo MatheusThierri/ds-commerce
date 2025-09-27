@@ -39,4 +39,16 @@ public class ProductController {
                                              .toUri();
         return ResponseEntity.created(uri).body(productDTO);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        productDTO = productService.update(id, productDTO);
+        return ResponseEntity.ok(productDTO);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        productService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
